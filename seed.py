@@ -1,4 +1,4 @@
-from lib.cat import Cat
+from lib.models.cat import Cat
 from lib.models.owner import Owner
 from lib.models.reservation import Reservation
 
