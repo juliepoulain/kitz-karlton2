@@ -780,6 +780,8 @@ def view_specific(class_type):
         if choice.upper() == "EXIT":
             exit_program()
         elif choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif choice.upper() == "Y":
             if class_type == Cat:
@@ -787,11 +789,15 @@ def view_specific(class_type):
                 time.sleep(1)
                 print(view.owner())
                 time.sleep(1)
+                print("Returning to manage cats menu...")
+                time.sleep(1)
                 employee_manage_cat()
             else:
                 print("finding cat(s)...")
                 time.sleep(1)
                 print(view.get_cats())
+                time.sleep(1)
+                print("Returning to manage owners menu...")
                 time.sleep(1)
                 employee_manage_owner()
         elif choice.upper() == "N":
@@ -825,15 +831,20 @@ def delete_selected(delete_me):
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice.upper() == "Y":
         delete_me.delete()
+        print("Successfully deleted!")
+        print(f"Returning to manage {delete_me_string}...")
+        time.sleep(1)
         if isinstance(delete_me, Cat):
-            specify_cat_update(delete_me)
+            employee_manage_cat()
         elif isinstance(delete_me, Owner):
-            specify_owner_update(delete_me)
+            employee_manage_owner()
         else:
-            specify_reservation_update(delete_me)
+            employee_manage_res()
     elif choice.upper() == "N":
         if isinstance(delete_me, Cat):
             specify_cat_update(delete_me)
@@ -863,6 +874,8 @@ def update_selected(class_type):
     if entered_id.upper() == "EXIT":
         exit_program()
     elif entered_id.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         entered_id.isnumeric() and class_type.find_by_id(int(entered_id))
@@ -986,7 +999,7 @@ def final_res_create(phone_number, length_of_stay, hotel_room_number):
         specify_reservation_update(res_to_update)
     elif choice == "5":
         res_to_update = Reservation.find_by_phone(phone_number)
-        delete_selected_reservation(res_to_update)
+        delete_selected(res_to_update)
     else:
         print("Please enter valid menu option...")
         time.sleep(1)
@@ -1042,9 +1055,9 @@ def final_res_create(phone_number, length_of_stay, hotel_room_number):
     print("Reservation Details:")
     print(reservation)
     time.sleep(1)
-    print("Returning to menu options...")
+    print("Returning to reservation menu options...")
     time.sleep(1)
-    print("Menu Options:")
+    print("Reservation Menu Options:")
     print("0: Exit Program")
     print("1: Return to Main Menu")
     print("2: Return to Employee Portal")
@@ -1055,6 +1068,8 @@ def final_res_create(phone_number, length_of_stay, hotel_room_number):
     if choice == "0":
         exit_program()
     elif choice == "1":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "2":
         employee_portal()
@@ -1090,7 +1105,7 @@ def specify_reservation_update(res_to_update):
         exit_program()
     elif choice == "1":
         print("Returning to main menu...")
-        time.sleep(1
+        time.sleep(1)
         main_menu()
     elif choice == "2":
         print("Returning to employee portal...")
@@ -1278,6 +1293,8 @@ def check_owner_phone_number(entered_name):
     if entered_phone.upper() == "EXIT":
         exit_program()
     elif entered_phone.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         entered_phone.isnumeric()
@@ -1295,6 +1312,8 @@ def check_owner_address(entered_name, entered_phone):
     if entered_address.upper() == "EXIT":
         exit_program()
     elif entered_address.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         isinstance(entered_address, str)
@@ -1326,10 +1345,14 @@ def final_owner_create(entered_name, entered_phone, entered_address):
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "0":
         exit_program()
     elif choice == "1":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "2":
         employee_portal()
@@ -1340,7 +1363,7 @@ def final_owner_create(entered_name, entered_phone, entered_address):
     elif choice == "5":
         delete_selected(owner)
     elif choice == "6":
-        create_cat(owner.id)
+        create_cat()
     else:
         print("Please enter valid menu option...")
         time.sleep(1)
@@ -1354,15 +1377,19 @@ def specify_owner_update(owner_to_update):
     print("3: Update Name for selected owner")
     print("4: Update Phone Number for selected owner")
     print("5: Update Address for selected owner")
-    print("6: Delete selected reservation")
+    print("6: Delete selected owner")
     choice = input("> ")
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "0": 
         exit_program()
     elif choice == "1":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "2":
         employee_portal()
@@ -1386,6 +1413,8 @@ def enter_new_owner_name(owner_to_update):
     if new_name.upper() == "EXIT":
         exit_program()
     elif new_name.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         isinstance(new_name, str) 
@@ -1401,10 +1430,14 @@ def enter_new_owner_name(owner_to_update):
         if choice.upper() == "EXIT":
             exit_program()
         elif choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif choice.upper() == "Y":
             specify_owner_update(owner_to_update)
         elif choice.upper() == "N":
+            print("Returning to manage owners...")
+            time.sleep(1)
             employee_manage_owner()
         else: 
             print("Please enter valid menu option...")
@@ -1436,10 +1469,14 @@ def enter_new_owner_phone(owner_to_update):
         if choice.upper() == "EXIT":
             exit_program()
         elif choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif choice.upper() == "Y":
             specify_owner_update(owner_to_update)
         elif choice.upper() == "N":
+            print("Returning to manage owners...")
+            time.sleep(1)
             employee_manage_owner()
         else:
             print("Please enter valid menu option...")
@@ -1471,10 +1508,14 @@ def enter_new_owner_address(owner_to_update):
         if choice.upper() == "EXIT":
             exit_program()
         elif choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif choice.upper() == "Y":
             specify_owner_update(owner_to_update)
         elif choice.upper() == "N":
+            print("Returning to manage owners...")
+            time.sleep(1)
             employee_manage_owner()
         else:
             print("Please enter valid menu option...")
