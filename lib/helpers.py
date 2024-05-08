@@ -21,8 +21,6 @@ def main_menu():
     print("Type 'menu' at any time to return to this menu")
     print("To select a menu option, please type in a number and hit enter")
     time.sleep(2)
-    print("Type 'exit' at any time to exit the program")
-    time.sleep(2)
     print("0: Exit Program")
     print("1: Make a Reservation")
     print("2: Employee Portal")
@@ -144,14 +142,17 @@ def employee_manage_owner():
     elif choice == "2":
         employee_portal()
     elif choice == "3":
-        print(Owner.get_all())
+        print("Loading all owners...")
+        time.sleep(1)
+        print(f"Owners:\n {Owner.get_all()}")
+        time.sleep(1)
         employee_manage_owner()
     elif choice == "4":
         create_owner()
     elif choice == "5":
         update_owner()
     elif choice == "6":
-        specific_owner()
+        view_specific(Owner)
     else:
         print("Please enter valid menu option...")
         time.sleep(1)
@@ -242,7 +243,7 @@ def employee_manage_cat():
     elif choice == "5":
         update_cat()
     elif choice == "6":
-        specific_cat()
+        view_specific(Cat)
     else:
         print("Please enter valid menu option...")
         time.sleep(1)
@@ -654,26 +655,69 @@ def delete_selected_cat(cat_to_update):
         time.sleep(1)
         delete_selected_cat(cat_to_update)
 
-def specific_cat():
-    print(Cat.get_all())
-    print("Please enter the ID (listed above) for the cat you would like to view")
-    entered_id = input("> ")
-    if (
-        entered_id.isnumeric() and Cat.find_by_id(int(entered_id))
-    ):
-        print(Cat.find_by_id(entered_id))
-        view_cat = Cat.find_by_id(entered_id)
-        print("See this owner's cat? Enter Y or N")
-        choice = input("> ")
-        if choice == "Y" or choice == "y":
-            print(Owner.find_by_id((view_cat.owner_id)))
-            employee_manage_cat()
-        else:
-            employee_manage_cat()
+##### VIEW SPECIFIC ######
+def view_specific(class_type):
+    if class_type == Cat:
+        class_type_string = "cat"
+        view_other = "owner"
+    elif class_type == Owner:
+        class_type_string = "owner"
+        view_other = "cat(s)"
     else:
-        print("INVALID: ID must be an existing Cat ID")
-        specific_cat()
-
+        raise ValueError("view_specific requrires argument of type Cat or Owner")
+    print(class_type.get_all())
+    print(f"Please enter the ID (listed above) for the {class_type_string} you would like to view.")
+    entered_id = input("> ")
+    if entered_id.isnumeric() and class_type.find_by_id(int(entered_id)):
+        print(class_type.find_by_id(entered_id))
+        view = class_type.find_by_id(entered_id)
+        print(f"See this {class_type_string}'s {view_other}? Enter Y or N")
+        choice = input("> ")
+        if choice.upper() == "Y":
+            if class_type == Cat:
+                print("finding owner...")
+                time.sleep(1)
+                print(view.owner())
+                employee_manage_cat()
+            else:
+                print("finding cat(s)...")
+                time.sleep(1)
+                print(view.get_cats())
+                employee_manage_owner()
+        else:
+            if class_type == Cat:
+                employee_manage_cat()
+            else:
+                employee_manage_owner()
+    else:
+        print(f"INVALID: ID must be an existing {class_type_string} ID")
+        time.sleep(1)
+        view_specific(class_type)
+        
+##### DELETE SELECTED #####
+def delete_selected(delete_me):
+    if isinstance(delete_me, Cat):
+        delete_me_string = "cat"
+    elif isinstance(delete_me, Owner):
+        delete_me_string = "owner"
+    else:
+        raise ValueError("delete_selected requrires argument of type Cat or Owner")
+    print(f"Are you sure you want to delete selected {delete_me_string}? Enter Y or N")
+    print(f"selected {delete_me_string} details:\n {delete_me}")
+    choice = input("> ")
+    if choice.upper() == "Y":
+        delete_me.delete()
+        if isinstance(delete_me, Cat):
+            specify_cat_update(delete_me)
+        else:
+            specify_owner_update(delete_me)
+    elif choice == "exit":
+        exit_program()
+    else:
+        if isinstance(delete_me, Cat):
+            specify_cat_update(delete_me)
+        else:
+            specify_owner_update(delete_me)
        
       
       
@@ -1431,23 +1475,23 @@ def delete_selected_owner(owner_to_update):
         specify_owner_update(owner_to_update)
 
 
-def specific_owner():
-    print(Owner.get_all())
-    print("Please enter the ID (listed above) for the owner you would like to view")
-    entered_id = input("> ")
-    if (
-        entered_id.isnumeric() and Owner.find_by_id(int(entered_id))
-    ):
-        print(Owner.find_by_id(entered_id))
-        view_owner = Owner.find_by_id(entered_id)
-        print("See this owner's cats? Enter Y or N")
-        choice = input("> ")
-        if choice == "Y" or choice == "y":
-            print(view_owner.get_cats())
-            employee_manage_owner()
-        else:
-            employee_manage_owner()
-    else:
-        print("INVALID: ID must be an existing Owner ID")
-        specific_owner()
+# def specific_owner():
+#     print(Owner.get_all())
+#     print("Please enter the ID (listed above) for the owner you would like to view")
+#     entered_id = input("> ")
+#     if (
+#         entered_id.isnumeric() and Owner.find_by_id(int(entered_id))
+#     ):
+#         print(Owner.find_by_id(entered_id))
+#         view_owner = Owner.find_by_id(entered_id)
+#         print("See this owner's cats? Enter Y or N")
+#         choice = input("> ")
+#         if choice == "Y" or choice == "y":
+#             print(view_owner.get_cats())
+#             employee_manage_owner()
+#         else:
+#             employee_manage_owner()
+#     else:
+#         print("INVALID: ID must be an existing Owner ID")
+#         specific_owner()
 
