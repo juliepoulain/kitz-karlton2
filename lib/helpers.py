@@ -2,7 +2,7 @@
 
 from models.reservation import Reservation
 from models.owner import Owner
-from models.cat import Cat
+from models.cat import Cat, ACCEPTED_BREEDS
 import time
 
 # julie tested on exit-loops branch
@@ -109,12 +109,15 @@ def employee_manage_res():
     elif choice == "2":
         employee_portal()
     elif choice == "3":
+        print("Loading all reservations...")
+        time.sleep(1)
         print(Reservation.get_all())
+        time.sleep(1)
         employee_manage_res()
     elif choice == "4":
         create_reservation()
     elif choice == "5":
-        update_reservation()
+        update_selected(Reservation)
     else:
         print("Please enter valid menu option...")
         time.sleep(1)
@@ -150,7 +153,7 @@ def employee_manage_owner():
     elif choice == "4":
         create_owner()
     elif choice == "5":
-        update_owner()
+        update_selected(Owner)
     elif choice == "6":
         view_specific(Owner)
     else:
@@ -241,25 +244,13 @@ def employee_manage_cat():
             time.sleep(1)
             employee_manage_cat()
     elif choice == "5":
-        update_cat()
+        update_selected(Cat)
     elif choice == "6":
         view_specific(Cat)
     else:
         print("Please enter valid menu option...")
         time.sleep(1)
         employee_manage_cat()
-
-ACCEPTED_BREEDS = [
-    "tabby",
-    "calico",
-    "shorthair",
-    "siamese",
-    "maine coon",
-    "persian",
-    "ragdoll",
-    "sphynx",
-    "scottish fold",
-]
 
 # julie tested on exit-loops branch
 def create_cat():
@@ -382,26 +373,9 @@ def check_cat_owner(name, breed, age, spice_level):
         check_cat_owner(name, breed, age, spice_level)
 
 # julie tested on exit-loops branch
-def update_cat():
-    print(Cat.get_all())
-    print("Please enter the ID (listed above) for the cat you would like to update")
-    entered_id = input("> ")
-    if entered_id.upper() == "EXIT":
-        exit_program()
-    elif entered_id.upper() == "MENU":
-        main_menu()
-    elif (
-        entered_id.isnumeric() and Cat.find_by_id(int(entered_id))
-    ):
-        cat_to_update = Cat.find_by_id(entered_id)
-        specify_cat_update(cat_to_update)
-    else:
-        print("INVALID: Entered ID must be a valid cat ID.")
-        update_cat()
-
-# julie tested on exit-loops branch
 def specify_cat_update(cat_to_update):
     print(f"Selected Cat:\n {cat_to_update}")
+    time.sleep(1)
     print("Update Cat - Menu Options")
     print("0: Exit Program")
     print("1: Return to Main Menu")
@@ -435,9 +409,9 @@ def specify_cat_update(cat_to_update):
     elif choice == "7":
         enter_new_cat_owner_id(cat_to_update)
     elif choice == "8":
-        delete_selected_cat(cat_to_update)
+        delete_selected(Cat)
     elif choice == "9":
-        update_cat()
+        update_selected(Cat)
     else:
         print("Please enter valid menu option...")
         time.sleep(1)
@@ -456,8 +430,9 @@ def enter_new_cat_name(cat_to_update):
         cat_to_update.name = new_name
         cat_to_update.update()
         print("Cat Name has been updated successfully!")
-        print("Updated Cat Details:")
-        print(cat_to_update)
+        time.sleep(1)
+        print(f"Updated Cat Details:\n {cat_to_update}")
+        time.sleep(1)
         print("Continue to update this cat? (Y/N)")
         # julie tested on exit-loops branch
         choice = input("> ")
@@ -468,7 +443,7 @@ def enter_new_cat_name(cat_to_update):
         elif choice.upper() == "Y":
             specify_cat_update(cat_to_update)
         elif choice.upper() == "N":
-            update_cat()
+            employee_manage_cat()
         else:
             print("Please enter valid menu option...")
             time.sleep(1)
@@ -491,8 +466,9 @@ def enter_new_cat_breed(cat_to_update):
         cat_to_update.breed = new_breed.lower()
         cat_to_update.update()
         print("Cat Breed has been updated successfully!")
-        print("Updated Cat Details:")
-        print(cat_to_update)
+        time.sleep(1)
+        print(f"Updated Cat Details:\n {cat_to_update}")
+        time.sleep(1)
         print("Continue to update this cat? (Y/N)")
         # julie tested on exit-loops branch
         choice = input("> ")
@@ -503,7 +479,7 @@ def enter_new_cat_breed(cat_to_update):
         elif choice.upper() == "Y":
             specify_cat_update(cat_to_update)
         elif choice.upper() == "N":
-            update_cat()
+            employee_manage_cat()
         else:
             print("Please enter valid menu option...")
             time.sleep(1)
@@ -540,7 +516,7 @@ def enter_new_cat_age(cat_to_update):
         elif choice.upper() == "Y":
             specify_cat_update(cat_to_update)
         elif choice.upper() == "N":
-            update_cat()
+            employee_manage_cat()
         else:
             print("Please enter valid menu option...")
             time.sleep(1)
@@ -575,7 +551,7 @@ def enter_new_cat_spice_level(cat_to_update):
         elif choice.upper() == "Y":
             specify_cat_update(cat_to_update)
         elif choice.upper() == "N":
-            update_cat()
+            employee_manage_cat()
         else:
             print("Please enter valid menu option...")
             time.sleep(1)
@@ -622,7 +598,7 @@ def enter_new_cat_owner_id(cat_to_update):
             elif choice.upper() == "Y":
                 specify_cat_update(cat_to_update)
             elif choice.upper() == "N":
-                update_cat()
+                employee_manage_cat()
             else:
                 print("Please enter valid menu option...")
                 time.sleep(1)
@@ -637,24 +613,6 @@ def enter_new_cat_owner_id(cat_to_update):
         enter_new_cat_owner_id(cat_to_update)
 
 # julie tested on exit-loops branch
-def delete_selected_cat(cat_to_update):
-    print(f"Selected Cat Details:\n {cat_to_update}")
-    print("Are you sure you want to delete selected cat? (Y/N)")
-    choice = input("> ")
-    if choice.upper() == "EXIT":
-        exit_program()
-    elif choice.upper() == "MENU":
-        main_menu()
-    elif choice.upper() == "Y":
-        cat_to_update.delete()
-        specify_cat_update(cat_to_update)
-    elif choice.upper() == "N":
-        specify_cat_update(cat_to_update)
-    else:
-        print("Please enter valid menu option...")
-        time.sleep(1)
-        delete_selected_cat(cat_to_update)
-
 ##### VIEW SPECIFIC ######
 def view_specific(class_type):
     if class_type == Cat:
@@ -664,31 +622,41 @@ def view_specific(class_type):
         class_type_string = "owner"
         view_other = "cat(s)"
     else:
-        raise ValueError("view_specific requrires argument of type Cat or Owner")
+        raise ValueError("view_specific requires argument of type Cat or Owner")
     print(class_type.get_all())
     print(f"Please enter the ID (listed above) for the {class_type_string} you would like to view.")
     entered_id = input("> ")
     if entered_id.isnumeric() and class_type.find_by_id(int(entered_id)):
         print(class_type.find_by_id(entered_id))
         view = class_type.find_by_id(entered_id)
-        print(f"See this {class_type_string}'s {view_other}? Enter Y or N")
+        print(f"See this {class_type_string}'s {view_other}? (Y/N)")
         choice = input("> ")
-        if choice.upper() == "Y":
+        if choice.upper() == "EXIT":
+            exit_program()
+        elif choice.upper() == "MENU":
+            main_menu()
+        elif choice.upper() == "Y":
             if class_type == Cat:
                 print("finding owner...")
                 time.sleep(1)
                 print(view.owner())
+                time.sleep(1)
                 employee_manage_cat()
             else:
                 print("finding cat(s)...")
                 time.sleep(1)
                 print(view.get_cats())
+                time.sleep(1)
                 employee_manage_owner()
-        else:
+        elif choice.upper() == "N":
             if class_type == Cat:
                 employee_manage_cat()
             else:
                 employee_manage_owner()
+        else:
+            print("Please enter valid menu option...")
+            time.sleep(1)
+            view_specific(class_type)
     else:
         print(f"INVALID: ID must be an existing {class_type_string} ID")
         time.sleep(1)
@@ -700,27 +668,69 @@ def delete_selected(delete_me):
         delete_me_string = "cat"
     elif isinstance(delete_me, Owner):
         delete_me_string = "owner"
+    elif isinstance(delete_me, Reservation):
+        delete_me_string = "reservation"
     else:
-        raise ValueError("delete_selected requrires argument of type Cat or Owner")
-    print(f"Are you sure you want to delete selected {delete_me_string}? Enter Y or N")
+        raise ValueError("delete_selected requires argument of type Cat, Owner, or Reservation")
+    print(f"Are you sure you want to delete selected {delete_me_string}? (Y/N)")
+    time.sleep(1)
     print(f"selected {delete_me_string} details:\n {delete_me}")
     choice = input("> ")
-    if choice.upper() == "Y":
+    if choice.upper() == "EXIT":
+        exit_program()
+    elif choice.upper() == "MENU":
+        main_menu()
+    elif choice.upper() == "Y":
         delete_me.delete()
         if isinstance(delete_me, Cat):
             specify_cat_update(delete_me)
-        else:
+        elif isinstance(delete_me, Owner):
             specify_owner_update(delete_me)
-    elif choice == "exit":
-        exit_program()
-    else:
+        else:
+            specify_reservation_update(delete_me)
+    elif choice.upper() == "N":
         if isinstance(delete_me, Cat):
             specify_cat_update(delete_me)
-        else:
+        elif isinstance(delete_me, Owner):
             specify_owner_update(delete_me)
-       
-      
-      
+        else:
+            specify_reservation_update(delete_me)
+    else:
+        print("Please enter valid menu option...")
+        time.sleep(1)
+        delete_selected(delete_me)
+
+##### UPDATE SELECTED #####
+def update_selected(class_type):
+    if class_type == Cat:
+        class_type_string = "cat"
+    elif class_type == Owner:
+        class_type_string = "owner"
+    elif class_type == Reservation:
+        class_type_string = "reservation"
+    else:
+        raise ValueError("update_selected requires argument of type Cat, Owner, or Reservation")
+    print(class_type.get_all())
+    time.sleep(1)
+    print(f"Please enter the ID (listed above) for the {class_type_string} you would like to update")
+    entered_id = input("> ")
+    if entered_id.upper() == "EXIT":
+        exit_program()
+    elif entered_id.upper() == "MENU":
+        main_menu()
+    elif (
+        entered_id.isnumeric() and class_type.find_by_id(int(entered_id))
+    ):
+        update_me = class_type.find_by_id(entered_id)
+        if class_type == Cat:
+            specify_cat_update(update_me)
+        elif class_type == Owner:
+            specify_owner_update(update_me)
+        else:
+            specify_reservation_update(update_me)
+    else:
+        print(f"INVALID: Entered ID must be a valid {class_type_string} ID.")
+        update_selected(class_type)
         
         
         
@@ -1123,8 +1133,10 @@ def check_hotel_room_number(phone_number, length_of_stay):
         check_hotel_room_number(phone_number, length_of_stay)
 
 def final_res_create(phone_number, length_of_stay, hotel_room_number):
+    reservation = Reservation.find_by_phone(phone_number)
     print("Reservation Details:")
-    print(Reservation.find_by_phone(phone_number))
+    print(reservation)
+    time.sleep(1)
     print("Returning to menu options...")
     time.sleep(1)
     print("Menu Options:")
@@ -1144,30 +1156,17 @@ def final_res_create(phone_number, length_of_stay, hotel_room_number):
     elif choice == "3":
         create_reservation()
     elif choice == "4":
-        res_to_update = Reservation.find_by_phone(phone_number)
-        specify_reservation_update(res_to_update)
+        specify_reservation_update(reservation)
     elif choice == "5":
-        res_to_update = Reservation.find_by_phone(phone_number)
-        delete_selected_reservation(res_to_update)
+        delete_selected(reservation)
     else:
         print("INVALID: entered value must be a number from given menu options")
         final_res_create(phone_number, length_of_stay, hotel_room_number)
 
-def update_reservation():
-    print(Reservation.get_all())
-    print("Please enter the ID (listed above) for the reservation you would like to update")
-    entered_id = input("> ")
-    if (
-        entered_id.isnumeric() and Reservation.find_by_id(int(entered_id))
-    ):
-        res_to_update = Reservation.find_by_id(entered_id)
-        specify_reservation_update(res_to_update)
-    else:
-        print("INVALID: ID must be an existing Reservation ID")
-        update_reservation()
-
 def specify_reservation_update(res_to_update):
     print(f"Selected Reservation: {res_to_update}")
+    time.sleep(1)
+    print("Update Reservation Menu Options:")
     print("0: Exit Program")
     print("1: Return to Main Menu")
     print("2: Return to Employee Portal")
@@ -1176,10 +1175,14 @@ def specify_reservation_update(res_to_update):
     print("5: Update Hotel Room Number for selected reservation")
     print("6: Delete selected reservation")
     choice = input("> ")
-    if choice == "0": 
+    if choice.upper() == "EXIT":
+        exit_program()
+    elif choice.upper() == "MENU":
+        main_menu()
+    elif choice == "0": 
         exit_program()
     elif choice == "1":
-        return_main_menu()
+        main_menu()
     elif choice == "2":
         employee_portal()
     elif choice == "3":
@@ -1189,7 +1192,7 @@ def specify_reservation_update(res_to_update):
     elif choice == "5":
         enter_new_hotel_room(res_to_update)
     elif choice == "6":
-        delete_selected_reservation(res_to_update)
+        delete_selected(res_to_update)
     else:
         print("INVALID: entered value must be a number from given menu options")
         specify_reservation_update(res_to_update)
@@ -1213,7 +1216,7 @@ def enter_new_phone(res_to_update):
         if choice == "Y" or choice == "y":
             specify_reservation_update(res_to_update)
         else:
-            update_reservation()
+            employee_manage_res()
     else: 
         print("INVALID: Phone number must be 10 digits with no spaces")
         enter_new_phone(res_to_update)
@@ -1236,7 +1239,7 @@ def enter_new_length_of_stay(res_to_update):
         if choice == "Y" or choice == "y":
             specify_reservation_update(res_to_update)
         else:
-            update_reservation()
+            employee_manage_res()
     else: 
         print("INVALID: Length of stay must be an integer between 1-14")
         enter_new_length_of_stay(res_to_update)
@@ -1259,23 +1262,10 @@ def enter_new_hotel_room(res_to_update):
         if choice == "Y" or choice == "y":
             specify_reservation_update(res_to_update)
         else:
-            update_reservation()
+            employee_manage_res()
     else: 
         print("INVALID: Hotel Room must be an integer between 1-10")
         enter_new_hotel_room(res_to_update)
-
-def delete_selected_reservation(res_to_update):
-    print(f"Selected Reservation: {res_to_update}")
-    print("Are you sure you want to delete this reservation? Enter Y or N")
-    choice = input("> ")
-    if choice == "Y" or choice == "y":
-        res_to_update.delete()
-        print("Reservation deleted successfully!")
-        print("Returning to manage reservations...")
-        time.sleep(1)
-        employee_manage_res()
-    else:
-        specify_reservation_update(res_to_update)
 
 def create_owner():
     print("Please enter owner's name")
@@ -1317,8 +1307,10 @@ def check_owner_address(entered_name, entered_phone):
         check_owner_address(entered_name, entered_phone)
 
 def final_owner_create(entered_name, entered_phone, entered_address):
+    owner = Owner.find_by_phone(entered_phone)
     print("Owner Details:")
-    print(Owner.find_by_phone(entered_phone))
+    print(owner)
+    time.sleep(1)
     print("Returning to menu options...")
     time.sleep(1)
     print("Menu Options:")
@@ -1339,30 +1331,14 @@ def final_owner_create(entered_name, entered_phone, entered_address):
     elif choice == "3":
         create_owner()
     elif choice == "4":
-        owner_to_update = Owner.find_by_phone(entered_phone)
-        specify_owner_update(owner_to_update)
+        specify_owner_update(owner)
     elif choice == "5":
-        owner_to_update = Owner.find_by_phone(entered_phone)
-        delete_selected_owner(owner_to_update)
+        delete_selected(owner)
     elif choice == "6":
-        cat_owner = Owner.find_by_phone(entered_phone)
-        create_cat(cat_owner.id)
+        create_cat(owner.id)
     else:
         print("INVALID: entered value must be a number from given menu options")
         final_owner_create(entered_name, entered_phone, entered_address)
-        
-def update_owner():
-    print(Owner.get_all())
-    print("Please enter the ID (listed above) for the owner you would like to update")
-    entered_id = input("> ")
-    if (
-        entered_id.isnumeric() and Owner.find_by_id(int(entered_id))
-    ):
-        owner_to_update = Owner.find_by_id(entered_id)
-        specify_owner_update(owner_to_update)
-    else:
-        print("INVALID: ID must be an existing Owner ID")
-        update_owner()
 
 def specify_owner_update(owner_to_update):
     print(f"Selected Owner: {owner_to_update}")
@@ -1374,10 +1350,14 @@ def specify_owner_update(owner_to_update):
     print("5: Update Address for selected owner")
     print("6: Delete selected reservation")
     choice = input("> ")
-    if choice == "0": 
+    if choice.upper() == "EXIT":
+        exit_program()
+    elif choice.upper() == "MENU":
+        main_menu()
+    elif choice == "0": 
         exit_program()
     elif choice == "1":
-        return_main_menu()
+        main_menu()
     elif choice == "2":
         employee_portal()
     elif choice == "3":
@@ -1387,7 +1367,7 @@ def specify_owner_update(owner_to_update):
     elif choice == "5":
         enter_new_owner_address(owner_to_update)
     elif choice == "6":
-        delete_selected_owner(owner_to_update)
+        delete_selected(owner_to_update)
     else:
         print("INVALID: entered value must be a number from given menu options")
         specify_owner_update(owner_to_update)
@@ -1461,37 +1441,5 @@ def enter_new_owner_address(owner_to_update):
         print("INVALID: Address must be string")
         enter_new_owner_address(owner_to_update)
 
-def delete_selected_owner(owner_to_update):
-    print(f"Selected Owner: {owner_to_update}")
-    print("Are you sure you want to delete this owner? Enter Y or N")
-    choice = input("> ")
-    if choice == "Y" or choice == "y":
-        owner_to_update.delete()
-        print("Owner deleted successfully!")
-        print("Returning to manage owners...")
-        time.sleep(1)
-        employee_manage_owner()
-    else:
-        specify_owner_update(owner_to_update)
 
-
-# def specific_owner():
-#     print(Owner.get_all())
-#     print("Please enter the ID (listed above) for the owner you would like to view")
-#     entered_id = input("> ")
-#     if (
-#         entered_id.isnumeric() and Owner.find_by_id(int(entered_id))
-#     ):
-#         print(Owner.find_by_id(entered_id))
-#         view_owner = Owner.find_by_id(entered_id)
-#         print("See this owner's cats? Enter Y or N")
-#         choice = input("> ")
-#         if choice == "Y" or choice == "y":
-#             print(view_owner.get_cats())
-#             employee_manage_owner()
-#         else:
-#             employee_manage_owner()
-#     else:
-#         print("INVALID: ID must be an existing Owner ID")
-#         specific_owner()
 
