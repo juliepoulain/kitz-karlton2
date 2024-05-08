@@ -17,6 +17,7 @@ def main_menu():
     print("Type 'menu' at any time to return to this menu")
     time.sleep(1)
     print("MAIN MENU - To select a menu option, please type in a number and hit enter")
+    time.sleep(1)
     print("0: Exit Program")
     print("1: Make a Reservation")
     print("2: Employee Portal")
@@ -24,6 +25,8 @@ def main_menu():
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "0":
         exit_program()
@@ -33,16 +36,27 @@ def main_menu():
         print("0: Exit Program")
         print("1: Speak to an employee")
         res_choice = input("> ")
-        if res_choice == "0":
+        if choice.upper() == "EXIT":
+            exit_program()
+        elif choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
+            main_menu()
+        elif res_choice == "0":
             exit_program
         elif res_choice == "1":
             print("Hello! My name is Kit. Our reservation system is currently undergoing maintenance. Please call the front desk for assistance.")
+            time.sleep(1)
+            print("Returning to main menu...")
             time.sleep(1)
             main_menu()
         elif res_choice == "exit":
             exit_program
         else:
-            print("Please choose a valid menu option")
+            print("Please choose a valid menu option...")
+            time.sleep(1)
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
     elif choice == "2":
         employee_portal()
@@ -66,10 +80,14 @@ def employee_portal():
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "0":
         exit_program()
     elif choice == "1":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "2":
         employee_manage_res()
@@ -79,6 +97,8 @@ def employee_portal():
         employee_manage_cat()
     else:
         print("Please enter valid menu option...")
+        time.sleep(1)
+        print("Returning to employee portal...")
         time.sleep(1)
         employee_portal()
 
@@ -94,12 +114,18 @@ def employee_manage_res():
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "0":
         exit_program()
     elif choice == "1":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "2":
+        print("Returning to employee portal...")
+        time.sleep(1)
         employee_portal()
     elif choice == "3":
         print(Reservation.get_all())
@@ -110,6 +136,8 @@ def employee_manage_res():
         update_reservation()
     else:
         print("Please enter valid menu option...")
+        time.sleep(1)
+        print("Returning to manage reservations...")
         time.sleep(1)
         employee_manage_res()
 
@@ -126,12 +154,18 @@ def employee_manage_owner():
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "0":
         exit_program()
     elif choice == "1":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "2":
+        print("Returning to employee portal...")
+        time.sleep(1)
         employee_portal()
     elif choice == "3":
         print(Owner.get_all())
@@ -144,6 +178,8 @@ def employee_manage_owner():
         specific_owner()
     else:
         print("Please enter valid menu option...")
+        time.sleep(1)
+        print("Returning to manage owners...")
         time.sleep(1)
         employee_manage_owner()
 
@@ -160,15 +196,24 @@ def employee_manage_cat():
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "0":
         exit_program()
     elif choice == "1":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "2":
+        print("Returning to employee portal...")
+        time.sleep(1)
         employee_portal()
     elif choice == "3":
         print(Cat.get_all())
+        time.sleep(1)
+        print("Returning to manage cats...")
+        time.sleep(1)
         employee_manage_cat()
     elif choice == "4":
         print("Cat owner must exist to create cat")
@@ -178,6 +223,8 @@ def employee_manage_cat():
         if cat_choice.upper() == "EXIT":
             exit_program()
         elif cat_choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif cat_choice == "1":
             create_owner()
@@ -189,6 +236,8 @@ def employee_manage_cat():
             if owner_id_choice.upper() == "EXIT":
                 exit_program()
             elif owner_id_choice.upper() == "MENU":
+                print("Returning to main menu...")
+                time.sleep(1)
                 main_menu()
             elif owner_id_choice == "1":
                 print(Owner.get_all())
@@ -201,17 +250,25 @@ def employee_manage_cat():
                 if owner_id_ready.upper() == "EXIT":
                     exit_program()
                 elif owner_id_ready.upper() == "MENU":
+                    print("Returning to main menu...")
+                    time.sleep(1)
                     main_menu()
                 elif owner_id_ready == "0":
                     exit_program()
                 elif owner_id_ready == "1":
                     create_cat()
                 elif owner_id_ready == "2":
+                    print("Returning to main menu...")
+                    time.sleep(1)
                     main_menu()
                 elif owner_id_ready == "3":
+                    print("Returning to employee portal...")
+                    time.sleep(1)
                     employee_portal()
                 else:
                     print("Please enter valid menu option...")
+                    time.sleep(1)
+                    print("Returning to manage cats...")
                     time.sleep(1)
                     employee_manage_cat()
             elif owner_id_choice == "2":
@@ -219,9 +276,12 @@ def employee_manage_cat():
             else:
                 print("Please enter valid menu option...")
                 time.sleep(1)
+                print("Returning to manage cats...")
                 employee_manage_cat()
         else: 
             print("Please enter valid menu option...")
+            time.sleep(1)
+            print("Returning to manage cats...")
             time.sleep(1)
             employee_manage_cat()
     elif choice == "5":
@@ -230,6 +290,8 @@ def employee_manage_cat():
         specific_cat()
     else:
         print("Please enter valid menu option...")
+        time.sleep(1)
+        print("Returning to manage cats...")
         time.sleep(1)
         employee_manage_cat()
 
@@ -251,11 +313,14 @@ def create_cat():
     if name.upper() == "EXIT":
         exit_program()
     elif name.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif isinstance(name, str) and 0 < len(name) <= 30:
         check_cat_breed(name)
     else:
         print("INVALID: Name must be a non-empty string of 30 or fewer characters")
+        time.sleep(1)
         create_cat()
 
 def check_cat_breed(name):
@@ -264,6 +329,8 @@ def check_cat_breed(name):
     if breed.upper() == "EXIT":
         exit_program()
     elif breed.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif ACCEPTED_BREEDS.count(breed.lower()) > 0:
         breed = breed.lower()
@@ -271,7 +338,10 @@ def check_cat_breed(name):
         return breed
     else:
         print("INVALID: Cat breed must be listed in accepted breeds")
+        time.sleep(1)
         print(f"Accepted breeds:\n {ACCEPTED_BREEDS}")
+        print("Returning to enter cat breed...")
+        time.sleep(1)
         check_cat_breed(name)
 
 def check_cat_age(name, breed):
@@ -280,6 +350,8 @@ def check_cat_age(name, breed):
     if age.upper() == "EXIT":
         exit_program()
     elif age.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif age.isnumeric() and 0 < int(age) <= 30:
         age = int(age)
@@ -287,6 +359,8 @@ def check_cat_age(name, breed):
         return age
     else:
         print("INVALID: Age must be positive integer fewer than 31")
+        print("Returning to enter cat age...")
+        time.sleep(1)
         check_cat_age(name, breed)
 
 def check_cat_spice(name, breed, age):
@@ -295,6 +369,8 @@ def check_cat_spice(name, breed, age):
     if spice_level.upper() == "EXIT":
         exit_program()
     elif spice_level.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif spice_level.isnumeric() and 1 <= int(spice_level) <= 5:
         spice_level = int(spice_level)
@@ -302,6 +378,8 @@ def check_cat_spice(name, breed, age):
         return spice_level
     else:
         print("INVALID: Cat spice level must be an integer between 1 and 5, inclusive")
+        print("Returning to enter cat spice level...")
+        time.sleep(1)
         check_cat_spice(name, breed, age)
 
 def check_cat_owner(name, breed, age, spice_level):
@@ -311,9 +389,12 @@ def check_cat_owner(name, breed, age, spice_level):
     if choice_view_owner_ids.upper() == "EXIT":
         exit_program()
     elif choice_view_owner_ids.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice_view_owner_ids.upper() == "Y":
         print(Owner.get_all())
+        time.sleep(1)
         check_cat_owner(name, breed, age, spice_level)
     elif choice_view_owner_ids.upper() == "N":
         print("Please enter valid owner ID")
@@ -321,6 +402,7 @@ def check_cat_owner(name, breed, age, spice_level):
         if owner_id.isnumeric() and Owner.find_by_id(int(owner_id)):
             owner_id = int(owner_id)
             print("New Cat Details:")
+            time.sleep(1)
             new_cat = Cat.create(name, breed, age, spice_level, owner_id)
             print(Cat.find_by_id(new_cat.id))
             time.sleep(1)
@@ -334,12 +416,18 @@ def check_cat_owner(name, breed, age, spice_level):
             if choice.upper() == "EXIT":
                 exit_program()
             elif choice.upper() == "MENU":
+                print("Returning to main menu...")
+                time.sleep(1)
                 main_menu()
             elif choice == "0":
                 exit_program()
             elif choice == "1":
+                print("Returning to main menu...")
+                time.sleep(1)
                 main_menu()
             elif choice == "2":
+                print("Returning to employee portal...")
+                time.sleep(1)
                 employee_portal()
             elif choice == "3":
                 print(f"update {new_cat}")
@@ -347,15 +435,21 @@ def check_cat_owner(name, breed, age, spice_level):
             elif choice == "4":
                 create_cat()
             else:
-                print("Please enter valid menu option")
+                print("Please enter valid menu option...")
+                time.sleep(1)
+                print("Returning to enter cat owner id...")
                 time.sleep(1)
                 check_cat_owner(name, breed, age, spice_level)
         else:
             print("INVALID: ID must be a valid Owner ID")
             time.sleep(1)
+            print("Returning to enter cat owner id...")
+            time.sleep(1)
             check_cat_owner(name, breed, age, spice_level)
     else:
         print("Please enter valid menu option...")
+        time.sleep(1)
+        print("Returning to enter cat owner id...")
         time.sleep(1)
         check_cat_owner(name, breed, age, spice_level)
 
@@ -366,6 +460,8 @@ def update_cat():
     if entered_id.upper() == "EXIT":
         exit_program()
     elif entered_id.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         entered_id.isnumeric() and Cat.find_by_id(int(entered_id))
@@ -374,6 +470,9 @@ def update_cat():
         specify_cat_update(cat_to_update)
     else:
         print("INVALID: Entered ID must be a valid cat ID.")
+        time.sleep(1)
+        print("Returning to update cat...")
+        time.sleep(1)
         update_cat()
 
 def specify_cat_update(cat_to_update):
@@ -393,12 +492,18 @@ def specify_cat_update(cat_to_update):
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "0": 
         exit_program()
     elif choice == "1":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "2":
+        print("Returning to employee portal...")
+        time.sleep(1)
         employee_portal()
     elif choice == "3":
         enter_new_cat_name(cat_to_update)
@@ -413,9 +518,13 @@ def specify_cat_update(cat_to_update):
     elif choice == "8":
         delete_selected_cat(cat_to_update)
     elif choice == "9":
+        print("Returning to update cat...")
+        time.sleep(1)
         update_cat()
     else:
         print("Please enter valid menu option...")
+        time.sleep(1)
+        print("Returning to specify cat update...")
         time.sleep(1)
         specify_cat_update(cat_to_update)
 
@@ -426,6 +535,8 @@ def enter_new_cat_name(cat_to_update):
     if new_name.upper() == "EXIT":
         exit_program()
     elif new_name.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif 0 < len(new_name) <= 30:
         cat_to_update.name = new_name
@@ -438,17 +549,25 @@ def enter_new_cat_name(cat_to_update):
         if choice.upper() == "EXIT":
             exit_program()
         elif choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif choice.upper() == "Y":
             specify_cat_update(cat_to_update)
         elif choice.upper() == "N":
+            print("Returning to update cat...")
+            time.sleep(1)
             update_cat()
         else:
             print("Please enter valid menu option...")
             time.sleep(1)
+            print("Returning to enter new cat name...")
+            time.sleep(1)
             enter_new_cat_name(cat_to_update)
     else:
         print("INVALID: Name must be a non-empty string of 30 or fewer characters")
+        time.sleep(1)
+        print("Returning to enter new cat name...")
         time.sleep(1)
         enter_new_cat_name(cat_to_update)
 
@@ -459,6 +578,8 @@ def enter_new_cat_breed(cat_to_update):
     if new_breed.upper() == "EXIT":
         exit_program()
     elif new_breed.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif ACCEPTED_BREEDS.count(new_breed.lower()) > 0:
         cat_to_update.breed = new_breed.lower()
@@ -471,6 +592,8 @@ def enter_new_cat_breed(cat_to_update):
         if choice.upper() == "EXIT":
             exit_program()
         elif choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif choice.upper() == "Y":
             specify_cat_update(cat_to_update)
@@ -479,11 +602,15 @@ def enter_new_cat_breed(cat_to_update):
         else:
             print("Please enter valid menu option...")
             time.sleep(1)
+            print("Returning to enter new cat breed...")
+            time.sleep(1)
             enter_new_cat_breed(cat_to_update)
     else:
         print("INVALID: Cat breed must be listed in accepted breeds")
         time.sleep(1)
         print(f"Accepted breeds:\n {ACCEPTED_BREEDS}")
+        time.sleep(1)
+        print("Returning to enter new cat breed...")
         time.sleep(1)
         enter_new_cat_breed(cat_to_update)
 
@@ -494,6 +621,8 @@ def enter_new_cat_age(cat_to_update):
     if new_age.upper() == "EXIT":
         exit_program()
     elif new_age.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif new_age.isnumeric() and 0 < int(new_age) <= 30:
         cat_to_update.age = int(new_age)
@@ -506,17 +635,25 @@ def enter_new_cat_age(cat_to_update):
         if choice.upper() == "EXIT":
             exit_program()
         elif choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif choice.upper() == "Y":
             specify_cat_update(cat_to_update)
         elif choice.upper() == "N":
+            print("Returning to update cat...")
+            time.sleep(1)
             update_cat()
         else:
             print("Please enter valid menu option...")
             time.sleep(1)
+            print("Returning to enter new cat age...")
+            time.sleep(1)
             enter_new_cat_age(cat_to_update)
     else:
         print("INVALID: Age must be positive integer fewer than 31")
+        time.sleep(1)
+        print("Returning to enter new cat age...")
         time.sleep(1)
         enter_new_cat_age(cat_to_update)
         
@@ -527,6 +664,8 @@ def enter_new_cat_spice_level(cat_to_update):
     if new_spice_level.upper() == "EXIT":
         exit_program()
     elif new_spice_level.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif new_spice_level.isnumeric() and 1 <= int(new_spice_level) <= 5:
         cat_to_update.spice_level = int(new_spice_level)
@@ -539,17 +678,25 @@ def enter_new_cat_spice_level(cat_to_update):
         if choice.upper() == "EXIT":
             exit_program()
         elif choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif choice.upper() == "Y":
             specify_cat_update(cat_to_update)
         elif choice.upper() == "N":
+            print("Returning to update cat...")
+            time.sleep(1)
             update_cat()
         else:
             print("Please enter valid menu option...")
             time.sleep(1)
+            print("Returning to enter new spice level...")
+            time.sleep(1)
             enter_new_cat_spice_level(cat_to_update)
     else:
         print("INVALID: Cat spice level must be an integer between 1 and 5, inclusive")
+        time.sleep(1)
+        print("Returning to enter new spice level...")
         time.sleep(1)
         enter_new_cat_spice_level(cat_to_update)
 
@@ -561,6 +708,8 @@ def enter_new_cat_owner_id(cat_to_update):
     if choice_view_owner_ids.upper() == "EXIT":
         exit_program()
     elif choice_view_owner_ids.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice_view_owner_ids.upper() == "Y":
         print(Owner.get_all())
@@ -571,6 +720,8 @@ def enter_new_cat_owner_id(cat_to_update):
         if new_owner_id.upper() == "EXIT":
             exit_program()
         elif new_owner_id.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif new_owner_id.isnumeric() and Owner.find_by_id(int(new_owner_id)):
             cat_to_update.owner_id = int(new_owner_id)
@@ -583,21 +734,31 @@ def enter_new_cat_owner_id(cat_to_update):
             if choice.upper() == "EXIT":
                 exit_program()
             elif choice.upper() == "MENU":
+                print("Returning to main menu...")
+                time.sleep(1)
                 main_menu()
             elif choice.upper() == "Y":
                 specify_cat_update(cat_to_update)
             elif choice.upper() == "N":
+                print("Returning to update cat...")
+                time.sleep(1)
                 update_cat()
             else:
                 print("Please enter valid menu option...")
+                time.sleep(1)
+                print("Returning to enter new cat owner ID...")
                 time.sleep(1)
                 enter_new_cat_owner_id(cat_to_update)
         else: 
             print("INVALID: ID must be a valid Owner ID")
             time.sleep(1)
+            print("Returning to enter new cat owner ID...")
+            time.sleep(1)
             enter_new_cat_owner_id(cat_to_update)
     else:
         print("Please enter valid menu option...")
+        time.sleep(1)
+        print("Returning to enter new cat owner ID...")
         time.sleep(1)
         enter_new_cat_owner_id(cat_to_update)
 
@@ -608,14 +769,24 @@ def delete_selected_cat(cat_to_update):
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice.upper() == "Y":
         cat_to_update.delete()
-        specify_cat_update(cat_to_update)
+        print("Successfully deleted cat!")
+        time.sleep(1)
+        print("Returning to manage cats...")
+        time.sleep(1)
+        employee_manage_cat()
     elif choice.upper() == "N":
+        print("Returning to specify cat update...")
+        time.sleep(1)
         specify_cat_update(cat_to_update)
     else:
         print("Please enter valid menu option...")
+        time.sleep(1)
+        print("Returning to delete cat...")
         time.sleep(1)
         delete_selected_cat(cat_to_update)
 
@@ -626,6 +797,8 @@ def specific_cat():
     if entered_id.upper() == "EXIT":
         exit_program()
     elif entered_id.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         entered_id.isnumeric() and Cat.find_by_id(int(entered_id))
@@ -634,13 +807,21 @@ def specific_cat():
         view_cat = Cat.find_by_id(entered_id)
         print("See this owner's cat? (Y/N)")
         choice = input("> ")
-        if choice == "Y" or choice == "y":
+        if choice.upper() == "Y":
             print(Owner.find_by_id((view_cat.owner_id)))
+            time.sleep(1)
+            print("Returning to manage cats...")
+            time.sleep(1)
             employee_manage_cat()
         else:
+            print("Returning to manage cats...")
+            time.sleep(1)
             employee_manage_cat()
     else:
         print("INVALID: ID must be an existing Cat ID")
+        time.sleep(1)
+        print("Returning to view specific cat...")
+        time.sleep(1)
         specific_cat()
 
        
@@ -805,6 +986,8 @@ def create_reservation():
     if phone_number.upper() == "EXIT":
         exit_program()
     elif phone_number.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         phone_number.isnumeric()
@@ -815,6 +998,9 @@ def create_reservation():
         return phone_number
     else:
         print("INVALID: Phone number must be 10 digits with no spaces")
+        time.sleep(1)
+        print("Returning to create reservation...")
+        time.sleep(1)
         create_reservation()
 
 def check_length_of_stay(phone_number):
@@ -823,6 +1009,8 @@ def check_length_of_stay(phone_number):
     if length_of_stay.upper() == "EXIT":
         exit_program()
     elif length_of_stay.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         length_of_stay.isnumeric()
@@ -833,6 +1021,9 @@ def check_length_of_stay(phone_number):
         return length_of_stay
     else: 
         print("INVALID: Length of stay must be an integer between 1-14")
+        time.sleep(1)
+        print("Returning to enter length of stay...")
+        time.sleep(1)
         check_length_of_stay(phone_number)
 
 def check_hotel_room_number(phone_number, length_of_stay):
@@ -841,6 +1032,8 @@ def check_hotel_room_number(phone_number, length_of_stay):
     if hotel_room_number.upper() == "EXIT":
         exit_program()
     elif hotel_room_number.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         hotel_room_number.isnumeric()
@@ -852,6 +1045,9 @@ def check_hotel_room_number(phone_number, length_of_stay):
         final_res_create(phone_number, length_of_stay, hotel_room_number)
     else:
         print("INVALID: Hotel Room Number must be an integer between 1-10")
+        time.sleep(1)
+        print("Returning to enter hotel room number...")
+        time.sleep(1)
         check_hotel_room_number(phone_number, length_of_stay)
 
 def final_res_create(phone_number, length_of_stay, hotel_room_number):
@@ -870,14 +1066,22 @@ def final_res_create(phone_number, length_of_stay, hotel_room_number):
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "0":
         exit_program()
     elif choice == "1":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "2":
+        print("Returning to employee portal...")
+        time.sleep(1)
         employee_portal()
     elif choice == "3":
+        print("Returning to create reservation...")
+        time.sleep(1)
         create_reservation()
     elif choice == "4":
         res_to_update = Reservation.find_by_phone(phone_number)
@@ -888,6 +1092,8 @@ def final_res_create(phone_number, length_of_stay, hotel_room_number):
     else:
         print("Please enter valid menu option...")
         time.sleep(1)
+        print("Returning to update reservation...")
+        time.sleep(1)
         final_res_create(phone_number, length_of_stay, hotel_room_number)
 
 def update_reservation():
@@ -897,6 +1103,8 @@ def update_reservation():
     if entered_id.upper() == "EXIT":
         exit_program()
     elif entered_id.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         entered_id.isnumeric() and Reservation.find_by_id(int(entered_id))
@@ -905,6 +1113,9 @@ def update_reservation():
         specify_reservation_update(res_to_update)
     else:
         print("INVALID: ID must be an existing Reservation ID")
+        time.sleep(1)
+        print("Returning to update reservation...")
+        time.sleep(1)
         update_reservation()
 
 def specify_reservation_update(res_to_update):
@@ -920,12 +1131,18 @@ def specify_reservation_update(res_to_update):
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "0": 
         exit_program()
     elif choice == "1":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice == "2":
+        print("Returning to employee portal...")
+        time.sleep(1)
         employee_portal()
     elif choice == "3":
         enter_new_phone(res_to_update)
@@ -938,9 +1155,10 @@ def specify_reservation_update(res_to_update):
     else:
         print("Please enter valid menu option...")
         time.sleep(1)
+        print("Returning to specify reservation update...")
+        time.sleep(1)
         specify_reservation_update(res_to_update)
         
-
 def enter_new_phone(res_to_update):
     print(f"Selected Reservation: {res_to_update}")
     print("Please enter new phone number")
@@ -948,6 +1166,8 @@ def enter_new_phone(res_to_update):
     if new_phone.upper() == "EXIT":
         exit_program()
     elif new_phone.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         new_phone.isnumeric()
@@ -963,17 +1183,28 @@ def enter_new_phone(res_to_update):
         if choice.upper() == "EXIT":
             exit_program()
         elif choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif choice.upper() == "Y":
+            print("Returning to specify reservation update...")
+            time.sleep(1)
             specify_reservation_update(res_to_update)
         elif choice.upper() == "N":
+            print("Returning to update reservation...")
+            time.sleep(1)
             update_reservation()
         else:
             print("Please enter valid menu option...")
             time.sleep(1)
+            print("Returning to enter new phone...")
+            time.sleep(1)
             enter_new_phone(res_to_update)
     else: 
         print("INVALID: Phone number must be 10 digits with no spaces")
+        time.sleep(1)
+        print("Returning to enter new phone...")
+        time.sleep(1)
         enter_new_phone(res_to_update)
 
 def enter_new_length_of_stay(res_to_update):
@@ -983,6 +1214,8 @@ def enter_new_length_of_stay(res_to_update):
     if new_length.upper() == "EXIT":
         exit_program()
     elif new_length.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     if (
         new_length.isnumeric()
@@ -998,17 +1231,26 @@ def enter_new_length_of_stay(res_to_update):
         if choice.upper() == "EXIT":
             exit_program()
         elif choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif choice.upper() == "Y":
             specify_reservation_update(res_to_update)
         elif choice.upper() == "N":
+            print("Returning to update reservation...")
+            time.sleep(1)
             update_reservation()
         else:
             print("Please enter valid menu option...")
             time.sleep(1)
+            print("Returning to enter new length of stay...")
+            time.sleep(1)
             enter_new_length_of_stay(res_to_update)
     else: 
         print("INVALID: Length of stay must be an integer between 1-14")
+        time.sleep(1)
+        print("Returning to enter new length of stay...")
+        time.sleep(1)
         enter_new_length_of_stay(res_to_update)
 
 def enter_new_hotel_room(res_to_update):
@@ -1018,6 +1260,8 @@ def enter_new_hotel_room(res_to_update):
     if new_room.upper() == "EXIT":
         exit_program()
     elif new_room.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         new_room.isnumeric()
@@ -1033,17 +1277,26 @@ def enter_new_hotel_room(res_to_update):
         if choice.upper() == "EXIT":
             exit_program()
         elif choice.upper() == "MENU":
+            print("Returning to main menu...")
+            time.sleep(1)
             main_menu()
         elif choice.upper() == "Y":
             specify_reservation_update(res_to_update)
         elif choice.upper() == "N":
+            print("Returning to update reservation...")
+            time.sleep(1)
             update_reservation()
         else:
             print("Please enter valid menu option...")
             time.sleep(1)
+            print("Returning to enter new hotel room...")
+            time.sleep(1)
             enter_new_hotel_room(res_to_update)
     else: 
         print("INVALID: Hotel Room must be an integer between 1-10")
+        time.sleep(1)
+        print("Returning to enter new hotel room...")
+        time.sleep(1)
         enter_new_hotel_room(res_to_update)
 
 def delete_selected_reservation(res_to_update):
@@ -1053,6 +1306,8 @@ def delete_selected_reservation(res_to_update):
     if choice.upper() == "EXIT":
         exit_program()
     elif choice.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif choice.upper() == "Y":
         res_to_update.delete()
@@ -1062,9 +1317,13 @@ def delete_selected_reservation(res_to_update):
         time.sleep(1)
         employee_manage_res()
     elif choice.upper() == "N":
+        print("Returning to specify reservation update...")
+        time.sleep(1)
         specify_reservation_update(res_to_update)
     else:
         print("Please enter valid menu option...")
+        time.sleep(1)
+        print("Returning to delete reservation...")
         time.sleep(1)
         delete_selected_reservation(res_to_update)
 
@@ -1074,6 +1333,8 @@ def create_owner():
     if entered_name.upper() == "EXIT":
         exit_program()
     elif entered_name.upper() == "MENU":
+        print("Returning to main menu...")
+        time.sleep(1)
         main_menu()
     elif (
         isinstance(entered_name, str) 
@@ -1082,16 +1343,15 @@ def create_owner():
         check_owner_phone_number(entered_name)
     else:
         print("INVALID: Name must be a valid string between 1-20 characters")
+        time.sleep(1)
+        print("Returning to create owner...")
+        time.sleep(1)
         create_owner()
 
 def check_owner_phone_number(entered_name):
     print("Please enter owner's phone number")
     entered_phone = input("> ")
     if entered_phone.upper() == "EXIT":
-        exit_program()
-    elif entered_phone.upper() == "MENU":
-        main_menu()
-    elif entered_phone.upper() == "EXIT":
         exit_program()
     elif entered_phone.upper() == "MENU":
         main_menu()
