@@ -120,6 +120,7 @@ def employee_manage_cat():
     print("3: See all Cats")
     print("4: Create Cat")
     print("5: Update Cat")
+    print("6: View Specific Cat")
     choice = input("> ")
     if choice == "0":
         exit_program()
@@ -166,6 +167,8 @@ def employee_manage_cat():
                 exit_program()
     elif choice == "5":
         update_cat()
+    elif choice == "6":
+        specific_cat()
     elif choice == "exit":
         exit
     else:
@@ -456,6 +459,27 @@ def delete_selected_cat(cat_to_update):
         exit_program()
     else:
         specify_cat_update(cat_to_update)
+
+
+def specific_cat():
+    print(Cat.get_all())
+    print("Please enter the ID (listed above) for the cat you would like to view")
+    entered_id = input("> ")
+    if (
+        entered_id.isnumeric() and Cat.find_by_id(int(entered_id))
+    ):
+        print(Cat.find_by_id(entered_id))
+        view_cat = Cat.find_by_id(entered_id)
+        print("See this owner's cat? Enter Y or N")
+        choice = input("> ")
+        if choice == "Y" or choice == "y":
+            print(Owner.find_by_id((view_cat.owner_id)))
+            employee_manage_cat()
+        else:
+            employee_manage_cat()
+    else:
+        print("INVALID: ID must be an existing Cat ID")
+        specific_cat()
        
       
       
