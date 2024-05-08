@@ -15,7 +15,9 @@ def greeting():
 
 def main_menu():
     print("To select a menu option, please type in a number and hit enter")
+    time.sleep(2)
     print("Type 'exit' at any time to exit the program")
+    time.sleep(2)
     print("0: Exit Program")
     print("1: Make a Reservation")
     print("2: Employee Portal")
@@ -23,7 +25,22 @@ def main_menu():
     if choice == "0":
         exit_program()
     elif choice == "1":
-        print("res portal")
+        print("Please connect with an employee to make a reservation")
+        time.sleep(1)
+        print("0: Exit Program")
+        print("1: Speak to an employee")
+        res_choice = input("> ")
+        if res_choice == "0":
+            exit_program
+        elif res_choice == "1":
+            print("Hello! My name is Kit. Our reservation system is currently undergoing maintenance. Please call the front desk for assistance.")
+            time.sleep(1)
+            main_menu()
+        elif res_choice == "exit":
+            exit_program
+        else:
+            print("Please choose a valid menu option")
+            main_menu()
     elif choice == "2":
         employee_portal()
     elif choice == "exit":
