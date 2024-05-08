@@ -2,6 +2,7 @@ from models.cat import Cat
 from models.owner import Owner
 from models.reservation import Reservation
 
+print("seed running")
 Owner.drop_table()
 Cat.drop_table()
 Reservation.drop_table()
