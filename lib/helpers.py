@@ -15,9 +15,14 @@ def greeting():
 
 # julie tested on exit-loops branch
 def main_menu():
+
     print("MAIN MENU - To select a menu option, please type in a number and hit enter")
     print("Type 'exit' at any time to exit the program")
     print("Type 'menu' at any time to return to this menu")
+    print("To select a menu option, please type in a number and hit enter")
+    time.sleep(2)
+    print("Type 'exit' at any time to exit the program")
+    time.sleep(2)
     print("0: Exit Program")
     print("1: Make a Reservation")
     print("2: Employee Portal")
@@ -29,7 +34,22 @@ def main_menu():
     elif choice == "0":
         exit_program()
     elif choice == "1":
-        print("res portal")
+        print("Please connect with an employee to make a reservation")
+        time.sleep(1)
+        print("0: Exit Program")
+        print("1: Speak to an employee")
+        res_choice = input("> ")
+        if res_choice == "0":
+            exit_program
+        elif res_choice == "1":
+            print("Hello! My name is Kit. Our reservation system is currently undergoing maintenance. Please call the front desk for assistance.")
+            time.sleep(1)
+            main_menu()
+        elif res_choice == "exit":
+            exit_program
+        else:
+            print("Please choose a valid menu option")
+            main_menu()
     elif choice == "2":
         employee_portal()
     else:
@@ -147,6 +167,7 @@ def employee_manage_cat():
     print("4: Create Cat")
     print("5: Update Cat")
     # julie tested on exit-loops branch
+    print("6: View Specific Cat")
     choice = input("> ")
     if choice.upper() == "EXIT":
         exit_program()
@@ -220,6 +241,8 @@ def employee_manage_cat():
             employee_manage_cat()
     elif choice == "5":
         update_cat()
+    elif choice == "6":
+        specific_cat()
     else:
         print("Please enter valid menu option...")
         time.sleep(1)
@@ -630,6 +653,27 @@ def delete_selected_cat(cat_to_update):
         print("Please enter valid menu option...")
         time.sleep(1)
         delete_selected_cat(cat_to_update)
+
+def specific_cat():
+    print(Cat.get_all())
+    print("Please enter the ID (listed above) for the cat you would like to view")
+    entered_id = input("> ")
+    if (
+        entered_id.isnumeric() and Cat.find_by_id(int(entered_id))
+    ):
+        print(Cat.find_by_id(entered_id))
+        view_cat = Cat.find_by_id(entered_id)
+        print("See this owner's cat? Enter Y or N")
+        choice = input("> ")
+        if choice == "Y" or choice == "y":
+            print(Owner.find_by_id((view_cat.owner_id)))
+            employee_manage_cat()
+        else:
+            employee_manage_cat()
+    else:
+        print("INVALID: ID must be an existing Cat ID")
+        specific_cat()
+
        
       
       
