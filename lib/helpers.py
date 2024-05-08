@@ -13,13 +13,10 @@ def greeting():
     print("                じしˍ,)ノ")
 
 def main_menu():
-    print("MAIN MENU - To select a menu option, please type in a number and hit enter")
     print("Type 'exit' at any time to exit the program")
     print("Type 'menu' at any time to return to this menu")
-    print("To select a menu option, please type in a number and hit enter")
-    time.sleep(2)
-    print("Type 'exit' at any time to exit the program")
-    time.sleep(2)
+    time.sleep(1)
+    print("MAIN MENU - To select a menu option, please type in a number and hit enter")
     print("0: Exit Program")
     print("1: Make a Reservation")
     print("2: Employee Portal")
@@ -798,7 +795,7 @@ def specific_cat():
 
 
 
-        
+
         
         
         
