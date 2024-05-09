@@ -511,7 +511,7 @@ def specify_cat_update(cat_to_update):
     elif choice == "7":
         enter_new_cat_owner_id(cat_to_update)
     elif choice == "8":
-        delete_selected(Cat)
+        delete_selected(cat_to_update)
     elif choice == "9":
         print("Returning to update cat...")
         time.sleep(1)
