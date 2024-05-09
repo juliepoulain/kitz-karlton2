@@ -85,7 +85,7 @@ class Cat:
 
     @owner_id.setter
     def owner_id(self, owner_id):
-        if type(owner_id) is int and Owner.find_by_id(owner_id):
+        if isinstance(owner_id, int) and Owner.find_by_id(owner_id):
             self._owner_id = owner_id
         else:
             raise ValueError(" owner_id must reference an owner in the database")
