@@ -14,4 +14,4 @@ To run the program:
 
 ## CLI Walkthrough:
 
-
+![](https://github.com/juliepoulain/kitz-karlton2/blob/main/kitz_karlton_walkthrough.gif)
