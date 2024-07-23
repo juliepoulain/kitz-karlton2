@@ -1,4 +1,4 @@
-## Welcome to the Kitz-Karlton!
+## Welcome to the Kitz Karlton Hotel!
 
 Our CLI application works as an employee portal for a fake cat hotel - the Kitz Karlton. Users can interact with the CLI and follow the prompts to manage reservations, cats that stay at the hotel, and their owner data. 
 
